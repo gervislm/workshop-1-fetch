@@ -4,7 +4,7 @@
  **/
 
 const url = "https://platzi-avo.vercel.app";
-const appNode = document.querySelector('#app')
+const appNode = document.querySelector("#app");
 
 // Web API
 // Server Conect
@@ -14,30 +14,30 @@ window
   .then((response) => response.json())
   // JSON -> Data -> Render info browser
   .then((respJson) => {
-    
     const allItems = [];
-    
+
     respJson.data.forEach((item) => {
-      
       // create image
-      const image = document.createElement('img');
+      const image = document.createElement("img");
       image.src = `${url}${item.image}`;
-      image.className = "w-72"
+      image.className = "max-w-64";
 
       // create title
-      const title = document.createElement('h2');
+      const title = document.createElement("h2");
       title.textContent = item.name;
       title.className = "text-3xl";
 
       // create price
-      const price = document.createElement('div');
-      price.textContent = item.price;
-      price.className = "text-2xl";
+      const price = document.createElement("div");
+      price.textContent = `$ ${item.price}`;
+      price.className = "text-2xl text-right";
 
       const container = document.createElement("div");
       container.append(image, title, price);
-
       allItems.push(container);
+      container.className = "p-6";
     });
+
     appNode.append(...allItems);
-  })
+    appNode.className = "grid grid-cols-4 gap-4";
+  });
